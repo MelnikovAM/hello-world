@@ -1,0 +1,15 @@
+<meta charset="utf-8">
+<script>
+
+var sum = parseInt(prompt('Введите начальную сумму вклада: '));
+var mult = parseInt(prompt('Введите процентную ставку (%): '));
+var years = parseInt(prompt('Введите срок вклада: '));
+
+for (var n = 1; n <= years; n++) {
+	sum = sum * (1 + mult*0.01);
+	alert ('Срок вклада (лет): ' + n + ', Сумма вклада: ' + Math.floor(sum));
+}
+
+alert ('Итоговая сумма вклада: ' + Math.floor(sum));
+
+</script>

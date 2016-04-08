@@ -1,0 +1,37 @@
+<meta charset="utf-8">
+<script>
+
+var arr = []; // массив с данными резульатов рулетки
+var rounds = 1000000; // кол-во бросков шарика в рулетку
+var i = 0; // переменная для циклов for
+var num = 0; // переменная для случайного результата рулетки
+var red_lenght_max = 0; // максимальная серия выпадения красных подряд
+var red_length = 0; // переменная для подсчета серии выпадения подряд
+
+for (i=0; i<rounds; i++) {
+	num = Math.round(Math.random()*36);
+	if (num != 0) {
+		num = (num % 2) * 2 - 1;
+	} 
+	arr.push(num);
+}
+
+//alert(arr);
+
+for (i=0; i<arr.length; i++) {
+	if (arr[i] == -1) {
+		red_length = 0;
+		while ((i < arr.length) && arr[i] == -1) {
+			i++;
+			red_length++;
+		}
+
+		if (red_length > red_lenght_max)
+			red_lenght_max = red_length;
+	}
+}
+
+alert('Крутим рулетку 1.000.000 раз подряд');
+alert('Максимальное кол-во красного подряд: ' + red_lenght_max);
+
+</script>

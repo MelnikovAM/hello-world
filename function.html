@@ -1,0 +1,122 @@
+<meta charset="utf-8">
+<script>
+
+
+
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getCard () {
+	var cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+	return cards[getRandomInt (0, cards.length - 1)];
+}
+
+function getSum(cards) {
+	var Sum = 0	;
+	
+	// посчитаем все карты кроме тузов
+	for (var i = 0; i<cards.length; i++) {
+		var card = cards[i];
+		if (card != 'A') {
+			if (card == 'J' || card == 'Q' || card == 'K') {
+				Sum = Sum + 10;
+			} else {
+				Sum = Sum + parseInt(card);
+			}
+		}
+	}
+
+	// считаем тузы
+	for (var i = 0; i<cards.length; i++) {
+		var card = cards[i];
+		if (card == 'A') {
+			if (Sum > 10) {
+				Sum = Sum + 1;
+			} else {
+				Sum = Sum + 11;
+			}
+		}
+	}
+
+	return Sum;
+}
+
+function getStatus() {
+	return 'Дилер: ' + dealer.join(' ') + ' | Игрок: ' + player.join(' ') + '.';
+}
+
+var games = 0;
+var player_wins = 0;
+var answer_new_card = '';
+var answer_new_game = '1';
+
+alert('Это игра в BlackJack! Готов? Поехали!');
+
+do {	// цикл всей игры
+	
+	games++;
+	
+	// сдаем карты
+	var dealer = [getCard()]; 
+	var player = [getCard(), getCard()];
+	
+	// проверка раздачи BlackJack игроку сходу
+	if (getSum(player) == 21) {
+		player_wins++;
+		alert('Надо же, Black Jack при раздаче! Поздравляю!');
+		alert(getStatus());
+	} else {
+		var answer_new_card = '';
+		// в цикле сдаем карту игроку по его желанию
+		do {
+			answer_new_card = prompt(getStatus() + ' Хотите еще карту? Да - 1, Нет - иное: ');
+			
+			//сдаем карту игроку или прекращаем игру
+			if (answer_new_card == '1') {
+				player.push(getCard());
+				
+				//проверка на перебор или выигрыш игрока
+				var sum = getSum(player);
+				if (sum > 21) {
+					alert(getStatus() + ' Перебор очков! :(');
+					break;
+				} else {
+					if (sum == 21) {
+						player_wins++;
+						alert(getStatus() + ' Black Jack!!!');
+						break;
+					}
+				}
+			} else {
+				// в игру вступает дилер
+				while (getSum(dealer) < 17) {
+					dealer.push(getCard());
+					alert('Беру карту' + getStatus());
+				}
+				
+				// а теперь проверка результатов
+				var SumDealer = getSum(dealer);
+				var SumPlayer = getSum(player);
+
+				if (SumDealer == 21) {
+					alert('Победа дилера - 21 очко!');
+				} else if (SumDealer > 21) {
+					player_wins++;
+					alert('Победа игрока со счетом ' + SumDealer + ' (Д) - ' + SumPlayer + ' (И).');
+				} else if (SumDealer >= SumPlayer) {
+					alert('Победа дилера со счетом ' + SumDealer + ' (Д) - ' + SumPlayer + ' (И).');
+				} else {
+					player_wins++;
+					alert('Победа игрока со счетом ' + SumDealer + ' (Д) - ' + SumPlayer + ' (И).');
+				}
+				}
+		} while (answer_new_card == '1');
+			
+	}
+answer_new_game = prompt ('Сыграем еще? Да - 1, Нет - иное: ');
+} while (answer_new_game == '1');
+
+alert('Сыграно партий: ' + games + '. Побед - ' + player_wins + ', поражений - ' + (games - player_wins) + '.');
+
+</script>
