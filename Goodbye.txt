@@ -1,0 +1,4 @@
+<script>
+alert('Goodbye');
+alert('Bye-bye');
+</script>
