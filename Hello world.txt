@@ -1,4 +1,5 @@
 <script>
 alert('Hello, world');
-alert('It's Me')
+alert('It's Me');
+alert('Hello');
 </script>
