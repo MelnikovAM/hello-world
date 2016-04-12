@@ -2,4 +2,5 @@
 alert('Hello, world');
 alert('It's Me');
 alert('Hello');
+var a = prompt('How are you?');
 </script>
