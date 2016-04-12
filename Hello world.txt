@@ -2,4 +2,8 @@
 alert('Hello, world');
 alert('It's Me');
 alert('Hello');
+
+alert('I've only question');
+var quest = prompt('Are you ok?');
+
 </script>
