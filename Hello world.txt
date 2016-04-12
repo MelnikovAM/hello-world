@@ -2,6 +2,9 @@
 alert('Hello, world');
 alert('It's Me');
 alert('Hello');
-var a = prompt('How are you?');
-alert(a + ' - это замечательно');
+
+alert('I've only question');
+var quest = prompt('Are you ok?');
+alert(quest + ' - это замечательно');
+
 </script>
